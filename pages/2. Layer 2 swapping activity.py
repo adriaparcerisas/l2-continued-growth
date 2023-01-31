@@ -368,6 +368,14 @@ results4 = compute(sql4)
 df4 = pd.DataFrame(results4.records)
 df4.info()
 
+results5 = compute(sql5)
+df5 = pd.DataFrame(results5.records)
+df5.info()
+
+results6 = compute(sql6)
+df6 = pd.DataFrame(results6.records)
+df6.info()
+
 import plotly.graph_objects as go
 from plotly.subplots import make_subplots
 
