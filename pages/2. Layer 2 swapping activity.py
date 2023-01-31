@@ -976,3 +976,10 @@ with tab3:
     st.plotly_chart(fig3, theme="streamlit", use_container_width=True)
 
 
+st.write('')
+st.subheader('Key insights')
+st.write('In the case of swaps, the activity has been lower over 2023 in comparison to the previous month on Arbitrum and Polygon, that experimented a high increase after FTX problems. However, the numbers remained similar on Optimism. In fact, there was a huge increas during the first mid of January.')
+st.write('In terms of swappers, the numbers also decayed a little bit from the past end of year. But in Optimism, the number of new swappers experimented a huge increase since January 1st. But suddenly decreased im the second mid of the month.')
+st.write('The new swappers registered identhical metrics than the daily active users.')
+st.write('During the previous 2 month, the swapper activity was declining in all 3 L2, but since the 2023, it seems that it has been recovering, reaching previous values.')
+
