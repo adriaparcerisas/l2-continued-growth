@@ -974,7 +974,12 @@ with tab3:
     st.plotly_chart(fig3, theme="streamlit", use_container_width=True)
 
 
-
+st.write('')
+st.subheader('Key insights')
+st.write('Regarding the NFT sales, it remained quite stable on Arbitrum and Optimism, but increased in Polygon.')
+st.write('In terms of active buyers, the numbers looks so similar in comparson to the previous month, even some sporadic jumps.')
+st.write('The daily user activity remained stable on Optimism, but on Arbitrum and Polygon there is an uptrend on the user ativity being more active during the past days.')
+st.write('Finally, the new users joining NFTs have been drsmatically decreased on Arbitrum and Optimism, while remained stable on Polygon.')
 
 
 
