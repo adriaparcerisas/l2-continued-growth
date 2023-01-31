@@ -971,5 +971,13 @@ with tab2:
 with tab3:
     st.plotly_chart(fig3, theme="streamlit", use_container_width=True)
 
-
-
+    
+    
+    
+    
+st.write('')
+st.subheader('Key insights')
+st.write('In terms of active buyers, the numbers looks so similar in comparson to the previous month, even some sporadic jumps.')
+st.write('The number of DeFi transactions decreased on Arbitrum and Polygon. In the case of Optimism, it increased during the previous month and continued its growth during the first mid of January. Afterthat, the number dropped to levels lower than before.')
+st.write('The DeFi users evolution has been similar for these three networks, experimenting a general downtrend. The same has occurred with the new users joining DeFi sector.')
+st.write('The user activity remained stable over time in all three L2.')
