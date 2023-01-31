@@ -256,6 +256,93 @@ defi_txs/defi_users as defi_txs_user
 order by 1 asc 
 """
 
+sql4="""
+WITH
+arbitrum as (
+select trunc (block_timestamp,'day') as date,
+  sum(amount_in_usd) as swapped_in,
+  sum(amount_out_usd)*(-1) as swapped_out,
+  swapped_in+swapped_out as netflow
+  from arbitrum.sushi.ez_swaps where block_timestamp>='2022-11-01'
+  group by 1
+),
+optimism as (
+  select trunc (block_timestamp,'day') as date,
+  sum(amount_in_usd) as swapped_in,
+  sum(amount_out_usd)*(-1) as swapped_out,
+  swapped_in+swapped_out as netflow
+  from optimism.sushi.ez_swaps where block_timestamp>='2022-11-01'
+  group by 1
+),
+polygon as (
+  select trunc (block_timestamp,'day') as date,
+  sum(amount_in_usd) as swapped_in,
+  sum(amount_out_usd)*(-1) as swapped_out,
+  swapped_in+swapped_out as netflow
+  from polygon.sushi.ez_swaps where block_timestamp>='2022-11-01'
+  group by 1
+)
+select * from arbitrum
+"""
+
+sql5="""
+WITH
+arbitrum as (
+select trunc (block_timestamp,'day') as date,
+  sum(amount_in_usd) as swapped_in,
+  sum(amount_out_usd)*(-1) as swapped_out,
+  swapped_in+swapped_out as netflow
+  from arbitrum.sushi.ez_swaps where block_timestamp>='2022-11-01'
+  group by 1
+),
+optimism as (
+  select trunc (block_timestamp,'day') as date,
+  sum(amount_in_usd) as swapped_in,
+  sum(amount_out_usd)*(-1) as swapped_out,
+  swapped_in+swapped_out as netflow
+  from optimism.sushi.ez_swaps where block_timestamp>='2022-11-01'
+  group by 1
+),
+polygon as (
+  select trunc (block_timestamp,'day') as date,
+  sum(amount_in_usd) as swapped_in,
+  sum(amount_out_usd)*(-1) as swapped_out,
+  swapped_in+swapped_out as netflow
+  from polygon.sushi.ez_swaps where block_timestamp>='2022-11-01'
+  group by 1
+)
+select * from optimism
+"""
+
+sql6="""
+WITH
+arbitrum as (
+select trunc (block_timestamp,'day') as date,
+  sum(amount_in_usd) as swapped_in,
+  sum(amount_out_usd)*(-1) as swapped_out,
+  swapped_in+swapped_out as netflow
+  from arbitrum.sushi.ez_swaps where block_timestamp>='2022-11-01'
+  group by 1
+),
+optimism as (
+  select trunc (block_timestamp,'day') as date,
+  sum(amount_in_usd) as swapped_in,
+  sum(amount_out_usd)*(-1) as swapped_out,
+  swapped_in+swapped_out as netflow
+  from optimism.sushi.ez_swaps where block_timestamp>='2022-11-01'
+  group by 1
+),
+polygon as (
+  select trunc (block_timestamp,'day') as date,
+  sum(amount_in_usd) as swapped_in,
+  sum(amount_out_usd)*(-1) as swapped_out,
+  swapped_in+swapped_out as netflow
+  from polygon.sushi.ez_swaps where block_timestamp>='2022-11-01'
+  group by 1
+)
+select * from polygon
+"""
+
 # In[11]:
 
 
@@ -276,9 +363,10 @@ df2.info()
 results3 = compute(sql3)
 df3 = pd.DataFrame(results3.records)
 df3.info()
-#st.subheader('Terra general activity metrics regarding transactions')
-#st.markdown('In this first part, we can take a look at the main activity metrics on Terra, where it can be seen how the number of transactions done across the protocol, as well as some other metrics such as fees and TPS.')
 
+results4 = compute(sql4)
+df4 = pd.DataFrame(results4.records)
+df4.info()
 
 import plotly.graph_objects as go
 from plotly.subplots import make_subplots
@@ -601,6 +689,129 @@ with tab3:
     st.plotly_chart(fig3, theme="streamlit", use_container_width=True)
 
 
+fig1 = make_subplots(specs=[[{"secondary_y": True}]])    
+fig1.add_trace(go.Bar(x=df4['date'],
+                y=df4['swapped_in'],
+                name='Swapped in (USD)',
+                marker_color='rgb(159, 246, 194)'
+                , yaxis='y'))
+fig1.add_trace(go.Bar(x=df4['date'],
+                y=df4['swapped_out'],
+                name='Swapped out (USD)',
+                marker_color='rgb(246, 159, 194)'
+                , yaxis='y'))
+fig1.add_trace(go.Line(x=df4['date'],
+                y=df4['netflow'],
+                name='Net volume',
+                marker_color='rgb(60, 60, 60)'
+                , yaxis='y2'))
+
+fig1.update_layout(
+    title='Arbitrum user activity',
+    xaxis_tickfont_size=14,
+    legend=dict(
+        x=0,
+        y=1.0,
+        bgcolor='rgba(255, 255, 255, 0)',
+        bordercolor='rgba(255, 255, 255, 0)'
+    ),
+    barmode='group',
+    bargap=0.15, # gap between bars of adjacent location coordinates.
+    bargroupgap=0.1 # gap between bars of the same location coordinate.
+)
+
+# Set y-axes titles
+fig1.update_yaxes(title_text="Daily in and out volume", secondary_y=False)
+fig1.update_yaxes(title_text="Daily netflow volume", secondary_y=True)
+
+
+fig2 = make_subplots(specs=[[{"secondary_y": True}]])
+
+fig2.add_trace(go.Bar(x=df5['date'],
+                y=df5['swapped_in'],
+                name='Swapped in (USD)',
+                marker_color='rgb(159, 246, 194)'
+                , yaxis='y'))
+fig2.add_trace(go.Bar(x=df5['date'],
+                y=df5['swapped_out'],
+                name='Swapped out (USD)',
+                marker_color='rgb(246, 159, 194)'
+                , yaxis='y'))
+fig2.add_trace(go.Line(x=df5['date'],
+                y=df5['netflow'],
+                name='Net volume',
+                marker_color='rgb(60, 60, 60)'
+                , yaxis='y2'))
+
+fig2.update_layout(
+    title='Optimism user activity',
+    xaxis_tickfont_size=14,
+    legend=dict(
+        x=0,
+        y=1.0,
+        bgcolor='rgba(255, 255, 255, 0)',
+        bordercolor='rgba(255, 255, 255, 0)'
+    ),
+    barmode='group',
+    bargap=0.15, # gap between bars of adjacent location coordinates.
+    bargroupgap=0.1 # gap between bars of the same location coordinate.
+)
+
+# Set y-axes titles
+fig2.update_yaxes(title_text="Daily in and out volume", secondary_y=False)
+fig2.update_yaxes(title_text="Daily netflow volume", secondary_y=True)
+
+
+fig3 = make_subplots(specs=[[{"secondary_y": True}]])
+
+fig3.add_trace(go.Bar(x=df6['date'],
+                y=df6['swapped_in'],
+                name='Swapped in (USD)',
+                marker_color='rgb(159, 246, 194)'
+                , yaxis='y'))
+fig3.add_trace(go.Bar(x=df6['date'],
+                y=df6['swapped_out'],
+                name='Swapped out (USD)',
+                marker_color='rgb(246, 159, 194)'
+                , yaxis='y'))
+fig3.add_trace(go.Line(x=df6['date'],
+                y=df6['netflow'],
+                name='Net volume',
+                marker_color='rgb(60, 60, 60)'
+                , yaxis='y2'))
+
+fig3.update_layout(
+    title='Polygon user activity',
+    xaxis_tickfont_size=14,
+    legend=dict(
+        x=0,
+        y=1.0,
+        bgcolor='rgba(255, 255, 255, 0)',
+        bordercolor='rgba(255, 255, 255, 0)'
+    ),
+    barmode='group',
+    bargap=0.15, # gap between bars of adjacent location coordinates.
+    bargroupgap=0.1 # gap between bars of the same location coordinate.
+)
+
+# Set y-axes titles
+fig3.update_yaxes(title_text="Daily in and out volume", secondary_y=False)
+fig3.update_yaxes(title_text="Daily netflow volume", secondary_y=True)
+
+
+tab1, tab2, tab3 = st.tabs(["Daily Arbitrum user activity", "Daily Optimism user activity", "Daily Polygon user activity"])
+
+with tab1:
+    st.plotly_chart(fig1, theme="streamlit", use_container_width=True)
+
+with tab2:
+    st.plotly_chart(fig2, theme="streamlit", use_container_width=True)
+
+with tab3:
+    st.plotly_chart(fig3, theme="streamlit", use_container_width=True)    
+    
+    
+    
 # In[ ]:
 
 
