@@ -698,7 +698,7 @@ with tab3:
 
 import plotly.express as px
 
-fig1 = px.area(df4, x="date", y="total_swapped"")
+fig1 = px.area(df4, x="date", y="total_swapped")
 
 fig1.update_layout(
     title='Arbitrum daily swapped volume',
@@ -714,7 +714,7 @@ fig1.update_layout(
     bargroupgap=0.1 # gap between bars of the same location coordinate.
 )
 
-fig2 = px.area(df5, x="date", y="total_swapped"")
+fig2 = px.area(df5, x="date", y="total_swapped")
 
 fig2.update_layout(
     title='Optimism daily swapped volume',
@@ -730,7 +730,7 @@ fig2.update_layout(
     bargroupgap=0.1 # gap between bars of the same location coordinate.
 )
 
-fig3 = px.area(df6, x="date", y="total_swapped"")
+fig3 = px.area(df6, x="date", y="total_swapped")
 
 
 fig3.update_layout(
