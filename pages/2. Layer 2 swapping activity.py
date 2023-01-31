@@ -291,7 +291,7 @@ arbitrum as (
 select trunc (block_timestamp,'day') as date,
   sum(amount_in_usd) as swapped_in,
   sum(amount_out_usd)*(-1) as swapped_out,
-  swapped_in+swapped_out as netflow
+  swapped_in as total_swapped
   from arbitrum.sushi.ez_swaps where block_timestamp>='2022-11-01'
   group by 1
 ),
@@ -299,7 +299,7 @@ optimism as (
   select trunc (block_timestamp,'day') as date,
   sum(amount_in_usd) as swapped_in,
   sum(amount_out_usd)*(-1) as swapped_out,
-  swapped_in+swapped_out as netflow
+  swapped_in as total_swapped
   from optimism.sushi.ez_swaps where block_timestamp>='2022-11-01'
   group by 1
 ),
@@ -307,7 +307,7 @@ polygon as (
   select trunc (block_timestamp,'day') as date,
   sum(amount_in_usd) as swapped_in,
   sum(amount_out_usd)*(-1) as swapped_out,
-  swapped_in+swapped_out as netflow
+  swapped_in as total_swapped
   from polygon.sushi.ez_swaps where block_timestamp>='2022-11-01'
   group by 1
 )
@@ -320,7 +320,7 @@ arbitrum as (
 select trunc (block_timestamp,'day') as date,
   sum(amount_in_usd) as swapped_in,
   sum(amount_out_usd)*(-1) as swapped_out,
-  swapped_in+swapped_out as netflow
+  swapped_in as total_swapped
   from arbitrum.sushi.ez_swaps where block_timestamp>='2022-11-01'
   group by 1
 ),
@@ -328,7 +328,7 @@ optimism as (
   select trunc (block_timestamp,'day') as date,
   sum(amount_in_usd) as swapped_in,
   sum(amount_out_usd)*(-1) as swapped_out,
-  swapped_in+swapped_out as netflow
+  swapped_in as total_swapped
   from optimism.sushi.ez_swaps where block_timestamp>='2022-11-01'
   group by 1
 ),
@@ -336,7 +336,7 @@ polygon as (
   select trunc (block_timestamp,'day') as date,
   sum(amount_in_usd) as swapped_in,
   sum(amount_out_usd)*(-1) as swapped_out,
-  swapped_in+swapped_out as netflow
+  swapped_in as total_swapped
   from polygon.sushi.ez_swaps where block_timestamp>='2022-11-01'
   group by 1
 )
