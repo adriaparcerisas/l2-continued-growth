@@ -511,77 +511,77 @@ with tab3:
 
 fig1 = make_subplots(specs=[[{"secondary_y": True}]])
 
-  fig1.add_trace(go.Line(x=df['date'],
-                  y=df['avg_tx_per_user'],
-                  name='# of transactions',
-                  marker_color='rgb(163, 203, 249)'
-                  , yaxis='y'))
+fig1.add_trace(go.Line(x=df['date'],
+                y=df['avg_tx_per_user'],
+                name='# of transactions',
+                marker_color='rgb(163, 203, 249)'
+                , yaxis='y'))
 
-  fig1.update_layout(
-      title='Arbitrum user activity',
-      xaxis_tickfont_size=14,
-      legend=dict(
-          x=0,
-          y=1.0,
-          bgcolor='rgba(255, 255, 255, 0)',
-          bordercolor='rgba(255, 255, 255, 0)'
-      ),
-      barmode='group',
-      bargap=0.15, # gap between bars of adjacent location coordinates.
-      bargroupgap=0.1 # gap between bars of the same location coordinate.
+fig1.update_layout(
+    title='Arbitrum user activity',
+    xaxis_tickfont_size=14,
+    legend=dict(
+        x=0,
+        y=1.0,
+        bgcolor='rgba(255, 255, 255, 0)',
+        bordercolor='rgba(255, 255, 255, 0)'
+    ),
+    barmode='group',
+    bargap=0.15, # gap between bars of adjacent location coordinates.
+    bargroupgap=0.1 # gap between bars of the same location coordinate.
+)
+
+# Set y-axes titles
+fig1.update_yaxes(title_text="Daily transactions behavior", secondary_y=False)
+fig1.update_yaxes(title_text="", secondary_y=True)
+
+
+fig2 = make_subplots(specs=[[{"secondary_y": True}]])
+
+fig2.add_trace(go.Line(x=df2['date'],
+                y=df2['avg_tx_per_user'],
+                name='# of transactions',
+                marker_color='rgb(163, 203, 249)'
+                , yaxis='y'))
+
+fig2.update_layout(
+    title='Optimism user activity',
+    xaxis_tickfont_size=14,
+    legend=dict(
+        x=0,
+        y=1.0,
+        bgcolor='rgba(255, 255, 255, 0)',
+        bordercolor='rgba(255, 255, 255, 0)'
+    ),
+    barmode='group',
+    bargap=0.15, # gap between bars of adjacent location coordinates.
+    bargroupgap=0.1 # gap between bars of the same location coordinate.
   )
 
-  # Set y-axes titles
-  fig1.update_yaxes(title_text="Daily transactions behavior", secondary_y=False)
-  fig1.update_yaxes(title_text="", secondary_y=True)
+# Set y-axes titles
+fig2.update_yaxes(title_text="Daily transactions behavior", secondary_y=False)
+fig2.update_yaxes(title_text="", secondary_y=True)
 
-    
-  fig2 = make_subplots(specs=[[{"secondary_y": True}]])
+fig3 = make_subplots(specs=[[{"secondary_y": True}]])
 
-  fig2.add_trace(go.Line(x=df2['date'],
-                  y=df2['avg_tx_per_user'],
-                  name='# of transactions',
-                  marker_color='rgb(163, 203, 249)'
-                  , yaxis='y'))
+fig3.add_trace(go.Line(x=df3['date'],
+                y=df3['avg_tx_per_user'],
+                name='# of transactions',
+                marker_color='rgb(163, 203, 249)'
+                , yaxis='y'))
 
-  fig2.update_layout(
-      title='Optimism user activity',
-      xaxis_tickfont_size=14,
-      legend=dict(
-          x=0,
-          y=1.0,
-          bgcolor='rgba(255, 255, 255, 0)',
-          bordercolor='rgba(255, 255, 255, 0)'
-      ),
-      barmode='group',
-      bargap=0.15, # gap between bars of adjacent location coordinates.
-      bargroupgap=0.1 # gap between bars of the same location coordinate.
-  )
-
-  # Set y-axes titles
-  fig2.update_yaxes(title_text="Daily transactions behavior", secondary_y=False)
-  fig2.update_yaxes(title_text="", secondary_y=True)
-
-  fig3 = make_subplots(specs=[[{"secondary_y": True}]])
-
-  fig3.add_trace(go.Line(x=df3['date'],
-                  y=df3['avg_tx_per_user'],
-                  name='# of transactions',
-                  marker_color='rgb(163, 203, 249)'
-                  , yaxis='y'))
-
-  fig3.update_layout(
-      title='Polygon user activity',
-      xaxis_tickfont_size=14,
-      legend=dict(
-          x=0,
-          y=1.0,
-          bgcolor='rgba(255, 255, 255, 0)',
-          bordercolor='rgba(255, 255, 255, 0)'
-      ),
-      barmode='group',
-      bargap=0.15, # gap between bars of adjacent location coordinates.
-      bargroupgap=0.1 # gap between bars of the same location coordinate.
+fig3.update_layout(
+    title='Polygon user activity',
+    xaxis_tickfont_size=14,
+    legend=dict(
+        x=0,
+        y=1.0,
+        bgcolor='rgba(255, 255, 255, 0)',
+        bordercolor='rgba(255, 255, 255, 0)'
+    ),
+    barmode='group',
+    bargap=0.15, # gap between bars of adjacent location coordinates.
+    bargroupgap=0.1 # gap between bars of the same location coordinate.
   )
 
   # Set y-axes titles
