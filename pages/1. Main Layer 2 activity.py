@@ -977,7 +977,7 @@ with tab2:
 with tab3:
     st.plotly_chart(fig3, theme="streamlit", use_container_width=True)
     
-    
+st.write('')
 st.subheader('Key insights')
 st.write('Daily transactions remained st the same levels during 2023 in comparison to the past 2 months in Arbitrum and Polygon. However, in the case of Optimism, the number continued growing hard during the first half of January but then it suddenly dropped to levels below the previous 2 months.')
 st.write('In terms of active daily users, something similar occurred. Again for Arbitrum and Polygon the nimbers remained equal, maybe a bit lower in Arbitrum, but in the case of Optimism, the number of active users decreased considerably after January 15th.')
