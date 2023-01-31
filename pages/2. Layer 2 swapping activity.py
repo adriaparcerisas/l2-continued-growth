@@ -280,7 +280,8 @@ df3.info()
 #st.markdown('In this first part, we can take a look at the main activity metrics on Terra, where it can be seen how the number of transactions done across the protocol, as well as some other metrics such as fees and TPS.')
 
 
-
+import plotly.graph_objects as go
+from plotly.subplots import make_subplots
 
 # Create figure with secondary y-axis
 fig1 = make_subplots(specs=[[{"secondary_y": True}]])
