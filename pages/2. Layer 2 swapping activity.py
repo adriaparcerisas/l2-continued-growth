@@ -21,12 +21,12 @@ import matplotlib.ticker as ticker
 import numpy as np
 import plotly.express as px
 sdk = ShroomDK("7bfe27b2-e726-4d8d-b519-03abc6447728")
-
+st.set_page_config(page_title="Ethereum L2 swapping activity in 2023", layout="wide",initial_sidebar_state="collapsed")
 
 # In[19]:
 
 
-st.title('Ethereum L2 activity since 2023')
+st.title('Ethereum L2 swapping activity in 2023')
 
 
 # In[20]:
@@ -760,8 +760,8 @@ with tab3:
     results3 = compute(sql3)
     df3 = pd.DataFrame(results3.records)
     df3.info()
-    #st.subheader('Terra general activity metrics regarding transactions')
-    #st.markdown('In this first part, we can take a look at the main activity metrics on Terra, where it can be seen how the number of transactions done across the protocol, as well as some other metrics such as fees and TPS.')
+    #st.subheader('L2 general activity metrics regarding transactions')
+    #st.markdown('In this final part, we can take a look at the new users joining swapping activity on L2 as well as its main behavior activity.')
     
     
     # In[22]:
