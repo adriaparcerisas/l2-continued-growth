@@ -262,7 +262,7 @@ arbitrum as (
 select trunc (block_timestamp,'day') as date,
   sum(amount_in_usd) as swapped_in,
   sum(amount_out_usd)*(-1) as swapped_out,
-  swapped_in+swapped_out as netflow
+  swapped_in as total_swapped
   from arbitrum.sushi.ez_swaps where block_timestamp>='2022-11-01'
   group by 1
 ),
@@ -270,7 +270,7 @@ optimism as (
   select trunc (block_timestamp,'day') as date,
   sum(amount_in_usd) as swapped_in,
   sum(amount_out_usd)*(-1) as swapped_out,
-  swapped_in+swapped_out as netflow
+  swapped_in as total_swapped
   from optimism.sushi.ez_swaps where block_timestamp>='2022-11-01'
   group by 1
 ),
@@ -278,7 +278,7 @@ polygon as (
   select trunc (block_timestamp,'day') as date,
   sum(amount_in_usd) as swapped_in,
   sum(amount_out_usd)*(-1) as swapped_out,
-  swapped_in+swapped_out as netflow
+  swapped_in as total_swapped
   from polygon.sushi.ez_swaps where block_timestamp>='2022-11-01'
   group by 1
 )
@@ -696,7 +696,73 @@ with tab2:
 with tab3:
     st.plotly_chart(fig3, theme="streamlit", use_container_width=True)
 
+import plotly.express as px
 
+fig1 = px.area(df4, x="date", y="total_swapped"")
+
+fig1.update_layout(
+    title='Arbitrum daily swapped volume',
+    xaxis_tickfont_size=14,
+    legend=dict(
+        x=0,
+        y=1.0,
+        bgcolor='rgba(255, 255, 255, 0)',
+        bordercolor='rgba(255, 255, 255, 0)'
+    ),
+    barmode='group',
+    bargap=0.15, # gap between bars of adjacent location coordinates.
+    bargroupgap=0.1 # gap between bars of the same location coordinate.
+)
+
+fig2 = px.area(df5, x="date", y="total_swapped"")
+
+fig2.update_layout(
+    title='Optimism daily swapped volume',
+    xaxis_tickfont_size=14,
+    legend=dict(
+        x=0,
+        y=1.0,
+        bgcolor='rgba(255, 255, 255, 0)',
+        bordercolor='rgba(255, 255, 255, 0)'
+    ),
+    barmode='group',
+    bargap=0.15, # gap between bars of adjacent location coordinates.
+    bargroupgap=0.1 # gap between bars of the same location coordinate.
+)
+
+fig3 = px.area(df6, x="date", y="total_swapped"")
+
+
+fig3.update_layout(
+    title='Polygon daily swapped volume',
+    xaxis_tickfont_size=14,
+    legend=dict(
+        x=0,
+        y=1.0,
+        bgcolor='rgba(255, 255, 255, 0)',
+        bordercolor='rgba(255, 255, 255, 0)'
+    ),
+    barmode='group',
+    bargap=0.15, # gap between bars of adjacent location coordinates.
+    bargroupgap=0.1 # gap between bars of the same location coordinate.
+)
+
+
+tab1, tab2, tab3 = st.tabs(["Daily Arbitrum netflow volume", "Daily Optimism netflow volume", "Daily Polygon netflow volume"])
+
+with tab1:
+    st.plotly_chart(fig1, theme="streamlit", use_container_width=True)
+
+with tab2:
+    st.plotly_chart(fig2, theme="streamlit", use_container_width=True)
+
+with tab3:
+    st.plotly_chart(fig3, theme="streamlit", use_container_width=True)    
+    
+    
+    
+    
+    
 fig1 = make_subplots(specs=[[{"secondary_y": True}]])    
 fig1.add_trace(go.Bar(x=df4['date'],
                 y=df4['swapped_in'],
@@ -708,14 +774,9 @@ fig1.add_trace(go.Bar(x=df4['date'],
                 name='Swapped out (USD)',
                 marker_color='rgb(246, 159, 194)'
                 , yaxis='y'))
-fig1.add_trace(go.Line(x=df4['date'],
-                y=df4['netflow'],
-                name='Net volume',
-                marker_color='rgb(60, 60, 60)'
-                , yaxis='y2'))
 
 fig1.update_layout(
-    title='Arbitrum user activity',
+    title='Arbitrum volume activity',
     xaxis_tickfont_size=14,
     legend=dict(
         x=0,
@@ -730,7 +791,7 @@ fig1.update_layout(
 
 # Set y-axes titles
 fig1.update_yaxes(title_text="Daily in and out volume", secondary_y=False)
-fig1.update_yaxes(title_text="Daily netflow volume", secondary_y=True)
+fig1.update_yaxes(title_text="", secondary_y=True)
 
 
 fig2 = make_subplots(specs=[[{"secondary_y": True}]])
@@ -745,14 +806,9 @@ fig2.add_trace(go.Bar(x=df5['date'],
                 name='Swapped out (USD)',
                 marker_color='rgb(246, 159, 194)'
                 , yaxis='y'))
-fig2.add_trace(go.Line(x=df5['date'],
-                y=df5['netflow'],
-                name='Net volume',
-                marker_color='rgb(60, 60, 60)'
-                , yaxis='y2'))
 
 fig2.update_layout(
-    title='Optimism user activity',
+    title='Optimism volume activity',
     xaxis_tickfont_size=14,
     legend=dict(
         x=0,
@@ -767,7 +823,7 @@ fig2.update_layout(
 
 # Set y-axes titles
 fig2.update_yaxes(title_text="Daily in and out volume", secondary_y=False)
-fig2.update_yaxes(title_text="Daily netflow volume", secondary_y=True)
+fig2.update_yaxes(title_text="", secondary_y=True)
 
 
 fig3 = make_subplots(specs=[[{"secondary_y": True}]])
@@ -782,14 +838,9 @@ fig3.add_trace(go.Bar(x=df6['date'],
                 name='Swapped out (USD)',
                 marker_color='rgb(246, 159, 194)'
                 , yaxis='y'))
-fig3.add_trace(go.Line(x=df6['date'],
-                y=df6['netflow'],
-                name='Net volume',
-                marker_color='rgb(60, 60, 60)'
-                , yaxis='y2'))
 
 fig3.update_layout(
-    title='Polygon user activity',
+    title='Polygon volume activity',
     xaxis_tickfont_size=14,
     legend=dict(
         x=0,
@@ -804,10 +855,10 @@ fig3.update_layout(
 
 # Set y-axes titles
 fig3.update_yaxes(title_text="Daily in and out volume", secondary_y=False)
-fig3.update_yaxes(title_text="Daily netflow volume", secondary_y=True)
+fig3.update_yaxes(title_text="", secondary_y=True)
 
 
-tab1, tab2, tab3 = st.tabs(["Daily Arbitrum user activity", "Daily Optimism user activity", "Daily Polygon user activity"])
+tab1, tab2, tab3 = st.tabs(["Daily Arbitrum netflow volume", "Daily Optimism netflow volume", "Daily Polygon netflow volume"])
 
 with tab1:
     st.plotly_chart(fig1, theme="streamlit", use_container_width=True)
