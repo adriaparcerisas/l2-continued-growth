@@ -26,7 +26,7 @@ sdk = ShroomDK("7bfe27b2-e726-4d8d-b519-03abc6447728")
 # In[9]:
 
 
-st.title('Ethereum L2 Ecosystem Dashboard')
+st.title('Ethereum L2 Ecosystem in 2023')
 
 
 # In[10]:
