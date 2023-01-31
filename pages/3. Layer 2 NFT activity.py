@@ -763,7 +763,7 @@ with tab3:
     df3 = pd.DataFrame(results3.records)
     df3.info()
     #st.subheader('L2 general activity metrics regarding transactions')
-    #st.markdown('In this first part, we can take a look at the main activity metrics on L2, where it can be seen how the number of transactions done across the protocol, as well as some other metrics such as fees and TPS.')
+    #st.markdown('In this final part, we can take a look at the new users joining NFT ecosystem on L2 as well as its main behavior activity.')
     
     
     
