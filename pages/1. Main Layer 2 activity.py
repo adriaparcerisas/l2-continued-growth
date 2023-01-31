@@ -508,6 +508,97 @@ with tab2:
 with tab3:
     st.plotly_chart(fig3, theme="streamlit", use_container_width=True)
 
+
+
+
+    
+    fig2 = make_subplots(specs=[[{"secondary_y": True}]])
+    
+    fig2.add_trace(go.Line(x=df2['date'],
+                    y=df2['avg_tx_per_user'],
+                    name='# of transactions',
+                    marker_color='rgb(163, 203, 249)'
+                    , yaxis='y'))
+    fig2.add_trace(go.Line(x=df2['date'],
+                    y=df2['avg_swaps_per_swapper'],
+                    name='# of swaps',
+                    marker_color='rgb(11, 78, 154)'
+                    , yaxis='y'))
+    fig2.add_trace(go.Line(x=df2['date'],
+                    y=df2['nft_bought_per_user'],
+                    name='# of nfts',
+                    marker_color='rgb(55, 55, 55)'
+                    , yaxis='y2'))
+    fig2.add_trace(go.Line(x=df2['date'],
+                    y=df2['defi_txs_user'],
+                    name='# of transactions',
+                    marker_color='rgb(249, 11, 78)'
+                    , yaxis='y2'))
+    
+    fig2.update_layout(
+        title='Optimism user activity',
+        xaxis_tickfont_size=14,
+        legend=dict(
+            x=0,
+            y=1.0,
+            bgcolor='rgba(255, 255, 255, 0)',
+            bordercolor='rgba(255, 255, 255, 0)'
+        ),
+        barmode='group',
+        bargap=0.15, # gap between bars of adjacent location coordinates.
+        bargroupgap=0.1 # gap between bars of the same location coordinate.
+    )
+    
+    # Set y-axes titles
+    fig2.update_yaxes(title_text="Daily transactions/swaps behavior", secondary_y=False)
+    fig2.update_yaxes(title_text="Daily NFTs/DeFi behavior", secondary_y=True)
+    
+    
+    fig3 = make_subplots(specs=[[{"secondary_y": True}]])
+    
+    fig3.add_trace(go.Line(x=df3['date'],
+                    y=df3['avg_tx_per_user'],
+                    name='# of transactions',
+                    marker_color='rgb(163, 203, 249)'
+                    , yaxis='y'))
+    
+    fig3.update_layout(
+        title='Polygon user activity',
+        xaxis_tickfont_size=14,
+        legend=dict(
+            x=0,
+            y=1.0,
+            bgcolor='rgba(255, 255, 255, 0)',
+            bordercolor='rgba(255, 255, 255, 0)'
+        ),
+        barmode='group',
+        bargap=0.15, # gap between bars of adjacent location coordinates.
+        bargroupgap=0.1 # gap between bars of the same location coordinate.
+    )
+    
+    # Set y-axes titles
+    fig3.update_yaxes(title_text="Daily transactions/swaps behavior", secondary_y=False)
+    fig3.update_yaxes(title_text="Daily NFTs/DeFi behavior", secondary_y=True)
+    
+    
+    tab1, tab2, tab3 = st.tabs(["Daily Arbitrum user activity", "Daily Optimism user activity", "Daily Polygon user activity"])
+    
+    with tab1:
+        st.plotly_chart(fig1, theme="streamlit", use_container_width=True)
+    
+    with tab2:
+        st.plotly_chart(fig2, theme="streamlit", use_container_width=True)
+    
+    with tab3:
+        st.plotly_chart(fig3, theme="streamlit", use_container_width=True)
+
+
+
+
+
+
+    
+
     sql = f"""
     with 
     t1 as (
@@ -882,98 +973,3 @@ with tab3:
 
 
 
-
-fig2 = make_subplots(specs=[[{"secondary_y": True}]])
-
-fig2.add_trace(go.Line(x=df2['date'],
-                y=df2['avg_tx_per_user'],
-                name='# of transactions',
-                marker_color='rgb(163, 203, 249)'
-                , yaxis='y'))
-fig2.add_trace(go.Line(x=df2['date'],
-                y=df2['avg_swaps_per_swapper'],
-                name='# of swaps',
-                marker_color='rgb(11, 78, 154)'
-                , yaxis='y'))
-fig2.add_trace(go.Line(x=df2['date'],
-                y=df2['nft_bought_per_user'],
-                name='# of nfts',
-                marker_color='rgb(55, 55, 55)'
-                , yaxis='y2'))
-fig2.add_trace(go.Line(x=df2['date'],
-                y=df2['defi_txs_user'],
-                name='# of transactions',
-                marker_color='rgb(249, 11, 78)'
-                , yaxis='y2'))
-
-fig2.update_layout(
-    title='Optimism user activity',
-    xaxis_tickfont_size=14,
-    legend=dict(
-        x=0,
-        y=1.0,
-        bgcolor='rgba(255, 255, 255, 0)',
-        bordercolor='rgba(255, 255, 255, 0)'
-    ),
-    barmode='group',
-    bargap=0.15, # gap between bars of adjacent location coordinates.
-    bargroupgap=0.1 # gap between bars of the same location coordinate.
-)
-
-# Set y-axes titles
-fig2.update_yaxes(title_text="Daily transactions/swaps behavior", secondary_y=False)
-fig2.update_yaxes(title_text="Daily NFTs/DeFi behavior", secondary_y=True)
-
-
-fig3 = make_subplots(specs=[[{"secondary_y": True}]])
-
-fig3.add_trace(go.Line(x=df3['date'],
-                y=df3['avg_tx_per_user'],
-                name='# of transactions',
-                marker_color='rgb(163, 203, 249)'
-                , yaxis='y'))
-fig3.add_trace(go.Line(x=df3['date'],
-                y=df3['avg_swaps_per_swapper'],
-                name='# of swaps',
-                marker_color='rgb(11, 78, 154)'
-                , yaxis='y'))
-fig3.add_trace(go.Line(x=df3['date'],
-                y=df3['nft_bought_per_user'],
-                name='# of nfts',
-                marker_color='rgb(55, 55, 55)'
-                , yaxis='y2'))
-fig3.add_trace(go.Line(x=df3['date'],
-                y=df3['defi_txs_user'],
-                name='# of transactions',
-                marker_color='rgb(249, 11, 78)'
-                , yaxis='y2'))
-
-fig3.update_layout(
-    title='Polygon user activity',
-    xaxis_tickfont_size=14,
-    legend=dict(
-        x=0,
-        y=1.0,
-        bgcolor='rgba(255, 255, 255, 0)',
-        bordercolor='rgba(255, 255, 255, 0)'
-    ),
-    barmode='group',
-    bargap=0.15, # gap between bars of adjacent location coordinates.
-    bargroupgap=0.1 # gap between bars of the same location coordinate.
-)
-
-# Set y-axes titles
-fig3.update_yaxes(title_text="Daily transactions/swaps behavior", secondary_y=False)
-fig3.update_yaxes(title_text="Daily NFTs/DeFi behavior", secondary_y=True)
-
-
-tab1, tab2, tab3 = st.tabs(["Daily Arbitrum user activity", "Daily Optimism user activity", "Daily Polygon user activity"])
-
-with tab1:
-    st.plotly_chart(fig1, theme="streamlit", use_container_width=True)
-
-with tab2:
-    st.plotly_chart(fig2, theme="streamlit", use_container_width=True)
-
-with tab3:
-    st.plotly_chart(fig3, theme="streamlit", use_container_width=True)
