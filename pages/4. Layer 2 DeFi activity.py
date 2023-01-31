@@ -281,7 +281,8 @@ df3.info()
 
     
   
-
+import plotly.graph_objects as go
+from plotly.subplots import make_subplots
 fig1 = make_subplots(specs=[[{"secondary_y": True}]])
 
 fig1.add_trace(go.Bar(x=df['date'],
