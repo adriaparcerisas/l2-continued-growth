@@ -259,7 +259,7 @@ order by 1 asc
 # In[11]:
 
 
-st.experimental_memo(ttl=21600)
+st.experimental_memo(ttl=1000000)
 @st.cache
 def compute(a):
     data=sdk.query(a)
@@ -840,7 +840,7 @@ order by 1 asc
 # In[11]:
 
 
-st.experimental_memo(ttl=21600)
+st.experimental_memo(ttl=1000000)
 @st.cache
 def compute(a):
     results=sdk.query(a)
